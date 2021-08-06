@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AngularUserApp">
+    <head>
+        <title>User App</title>
+        <link rel = "icon" href = "content/avatar.png" type = "image/x-icon" style="width:10%;">
+        <script src="app\lib\angular.min.js"></script>
+        <script src="app\lib\angular-route.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/controllers/signupController.js"></script>
+        <script src="app/controllers/signInController.js"></script>
+        <script src="app/controllers/homeController.js"></script>
+        <script src="app/controllers/profileController.js"></script>
+        <script src="app/controllers/productsController.js"></script>
+        <script src="app/controllers/ordersController.js"></script>
+        <script src="app/controllers/changePassController.js"></script>
+        <script src="app/services/staticObjects.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/styleSheet.css"></link>
+        <script type="text/javascript" src='https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js'></script>
+    </head>
+    <body>
+        <main ng-view></main>
+    </body>
+</html>

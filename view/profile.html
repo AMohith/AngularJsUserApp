@@ -1,0 +1,171 @@
+<header ng-include = " 'header.html' "></header>
+<div>
+    <h4 style="font-family:Arial, Helvetica, sans-serif; font-size: 24px; text-align: center; margin: 15px auto">Your Profile</h4>
+</div>
+<div class="flex-container" style=" background-color:rgb(245, 245, 245);
+                              border-radius: 10px; margin-top:0px; width: 58%; padding:40px 0px 40px 35px;">
+    <form name="profileForm" ng-submit="updateUser()" novalidate>
+        <div style="display: flex;">
+            <div style="display: flex;">
+                <div for="firstName" style="margin-top: 10px; margin-right:30px;">First Name </div>
+                <div>
+                        <input ng-model="user.firstName" type="text"
+                            ng-pattern="reg.name"
+                            ng-required="true"
+                            id="firstName" 
+                            name="firstName"
+                            style="width:75%;"/>
+                        <div ng-show="profileForm.firstName.$touched && profileForm.firstName.$error.pattern" 
+                                    class="red" style="width: 90%; font-size: 12px; margin-left: 1.5%;">
+                                Enter valid input (min-length: 3)
+                            </div>
+                </div>
+            </div>
+
+            <div style="display: flex; margin-left: 20px;">
+                <div for="lastName" style="margin-top: 10px; margin-right:40px;">Last Name </div>
+                <div>
+                        <input ng-model="user.lastName" type="text"
+                            ng-pattern="reg.name"
+                            ng-required="true"
+                            id="lastName" 
+                            name="lastName"
+                            style="width:75%;"/>
+                        <div ng-show="profileForm.lastName.$touched && profileForm.lastName.$error.pattern" 
+                                            class="red" style="width: 90%; font-size: 12px; margin-left: 1.5%;">
+                                        Enter valid input (min-length: 3)
+                                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="display: flex; margin-top: 10px;">
+            <div style="display: flex ;">
+                <div for="emailAddress" style="margin-top: 10px; margin-right:5px;">Email Address </div>
+                <div>
+                        <input ng-model="user.emailAddress" type="text"
+                            ng-pattern="reg.emailId"
+                            ng-required="true"
+                            id="emailAddress" 
+                            name="emailAddress" style="width:75%;" readonly/>
+                        <div ng-show="profileForm.emailAddress.$touched && profileForm.emailAddress.$error.pattern" 
+                                    class="red"  style="width: 90%; font-size: 12px; margin-left: 1.5%;">
+                                Enter valid email id
+                            </div>
+                </div>
+            </div>
+
+            <div style="display: flex; margin-left: 20px;">
+                <div for="phoneNumber" style="margin-top: 10px; margin-right:5px;">Phone Number </div>
+                <div>
+                        <input ng-model="user.phoneNumber" type="text"
+                            ng-pattern="reg.phoneNumber"
+                            ng-required="true"
+                            id="phoneNumber" 
+                            name="phoneNumber"
+                            style="width:75%;"/>
+                        <div ng-show="profileForm.phoneNumber.$touched && profileForm.phoneNumber.$error.pattern" 
+                                    class="red"  style="width: 95%; font-size: 12px; margin-left: 1.5%;">
+                                Enter valid 10-digit phone number
+                            </div>
+                </div>
+            </div>
+        </div>
+
+
+    <p style="margin-bottom:0px;">Address: </p>
+        <div style="display: flex; width:100%;">
+            <div for="address1" style="margin-top: 18px; margin-right:5px;">Address Line 1 </div>
+            <div>
+                    <input ng-model="user.address1" type="text"
+                        ng-pattern="reg.addressLine"
+                        ng-required="true"
+                        id="address1" 
+                        name="address1"
+                        style="width:450px;"/>
+                    <div ng-show="profileForm.address1.$touched && profileForm.address1.$error.pattern" 
+                                class="red"  style="width: 90%; font-size: 12px; margin-left: 1.5%;">
+                            Enter valid input (min-length: 5)
+                        </div>
+            </div>
+        </div>
+
+        <div style="display: flex; width:100%;">
+            <div for="address2" style="margin-top: 18px; margin-right:5px;">Address Line 2 </div>
+            <div>
+                    <input ng-model="user.address2" type="text"
+                        ng-pattern="reg.addressLine"
+                        ng-required="true"
+                        id="address2" 
+                        name="address2"
+                        style="width:450px;"/>
+                    <div ng-show="profileForm.address2.$touched && profileForm.address2.$error.pattern" 
+                                class="red"  style="width: 90%; font-size: 12px; margin-left: 1.5%;">
+                            Enter valid input (min-length: 5)
+                        </div>
+            </div>
+        </div>
+
+        <div style="display:flex;  margin-top: 10px;">
+        <div>
+            <label for="country" style="margin-left:4px; margin-right:6px;">Country</label>
+              <select ng-model="user.country" id="country" 
+                    ng-options="country as country for (country, states) in countries"
+                    ng-required="true"
+                    id="country" 
+                    name="country"
+                    style="width:120px; font-size: 12px;"> 
+                    <option value=''></option>
+                </select>
+        </div>
+        
+            <div>
+                <label for="state" style="margin-left:15px;  margin-right:6px;">State</label>
+                <select ng-model="user.state" id="state" 
+                        ng-disabled="!user.country"
+                        ng-options="state as state for (state,city) in countries[user.country]"
+                        ng-required="true"
+                        id="state" 
+                        name="state"
+                        style="width:140px; font-size: 12px;"> 
+                        <option value=''></option>
+                    </select>
+            </div>
+            <div>
+                  <label for="city" style="margin-left:12px;  margin-right:px;">City</label>
+                  <select ng-model="user.city" id="city" 
+                          ng-disabled="!user.country"
+                        ng-options="city as city for city in countries[user.country][user.state]"
+                        ng-required="true"
+                        id="city" 
+                        name="city"
+                        style="width: 130px; font-size: 12px;"> 
+                        <option value=''></option>
+                    </select>  
+            </div>
+        </div>
+
+        <div style="display:flex; margin-top: 10px; ">
+        <div for="postalCode" style="margin-top: 12px; margin-right:5px;">Postal Code </div>
+        <div>
+                <input ng-model="user.postalCode" type="text"
+                    ng-pattern="reg.postalCode"
+                    ng-required="true"
+                    id="postalCode" 
+                    name="postalCode"
+                    style="width:75%;"/>
+                <div ng-show="profileForm.postalCode.$touched && profileForm.postalCode.$error.pattern" 
+                            class="red" style="width: 90%; font-size: 12px; margin-left: 1.5%;">
+                        Enter valid 6-digit postal code 
+                    </div>
+        </div>
+        </div>
+        <br>
+        <input type="button" style="background-color: #f48200;" value="Cancel" ng-click=cancel()></input>
+        <input type="submit" name="submit" value="Edit User" 
+            ng-disabled="profileForm.$invalid && profileForm.$error || profileForm.$pristine" 
+            style="background-color: rgb(35, 156, 35);"/>
+    </form>
+</div>
+
+<!-- ng-show="profileForm.$dirty" -->

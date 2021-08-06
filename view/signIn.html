@@ -1,0 +1,30 @@
+<div style="width:33%;  margin: 8% auto 0 auto">
+
+<div style=" margin-bottom:10px; padding:12px;font: size 16px; ; text-align: center; color: red; " 
+    ng-show="errorMessage != null">{{errorMessage}}</div>
+<div class="userContent" style=" border-radius: 10px;
+                                             background-color:rgb(245, 245, 245);">
+    <div>
+    <form name="signInForm" ng-submit="signInUser()" ng-model="hello" novalidate>
+        <div>
+        <label for="emailAddress" style="margin-left: 20px ;">Email Address</label>
+        <input type="email" ng-model= "user.emailAddress" ng-pattern= "/^[a-zA-Z0-9._&%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/" value="user.emailAddress" name="emailAddress" style="margin-left: 13px;" required/>
+        <span ng-show="signInForm.emailAddress.$touched && signInForm.emailAddress.$error.pattern" 
+                    class="red" style="margin-left: 35% ; margin-bottom:3px; margin-right:25%; font-size: 12px;" >
+                Enter valid email id
+            </span><br>
+        
+        <label for="password" style="margin-left: 20px ;">Password</label>
+        <input type="password" ng-model= "user.password" value="user.password" name="password" style="margin-left: 13px;" required/>
+        <input type="submit" name="submit" value="Sign in" ng-disabled="signInForm.$invalid && signInForm.$error">
+      </form>
+    </div>
+</div>
+</div>
+<div style="text-align: center; margin-top:10px;
+            border:1px solid #ddd; padding: 15px 20px; 
+            border-radius: 10px;"
+            class="jumpLink">
+    <span>New user ?</span>
+    <a href="" ng-click="signupRouter()" style=" font-size:14px;"> Create an account </a>
+</div>

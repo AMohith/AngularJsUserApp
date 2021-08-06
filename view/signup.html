@@ -1,0 +1,204 @@
+<div class="flex-container">
+
+<div><img src="content/picture (1).jpg" alt="Office Picture" style="width: 90%; border-radius: 10px;"></div>
+<div>
+    <h4 style="font-family:Arial, Helvetica, sans-serif; font-size: 20px; margin-bottom:10px;">REGISTRATION</h4>
+    <form name="signupForm" ng-submit="signupUser()" novalidate>
+        <div style="display: flex;">
+            <div>
+                <input ng-model="user.firstName" type="text"
+                      ng-pattern="reg.name"
+                      ng-required="true"
+                      placeholder="First Name"
+                      id="firstName" 
+                      name="firstName"/>
+            </div>
+            
+  
+          <div>
+                <input ng-model="user.lastName" type="text"
+                      ng-pattern="reg.name"
+                      ng-required="true"
+                      placeholder="Last Name "
+                      id="lastName" 
+                      name="lastName"/>
+                
+          </div>
+        </div>
+
+        <div style="display: flex;">
+            <div ng-show="(signupForm.firstName.$touched && signupForm.firstName.$error.pattern)" 
+                class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;">
+                Enter valid input (min-length: 3)
+            </div>
+            <div ng-show="(signupForm.lastName.$touched && signupForm.lastName.$error.pattern)" 
+                class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;">
+                Enter valid input (min-length: 3)
+            </div>
+        </div>
+
+        <div style="display: flex;">
+        <div>
+            <input ng-model="user.emailAddress" type="text"
+                    ng-pattern="reg.emailId"
+                    ng-required="true"
+                    placeholder="Email Address"
+                    id="emailAddress" 
+                    name="emailAddress"/>
+            <div ng-show="signupForm.emailAddress.$touched && signupForm.emailAddress.$error.pattern" 
+                        class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;">
+                    Enter valid email id
+            </div>
+        </div>
+
+        <div>
+            <input ng-model="user.phoneNumber" type="text"
+                ng-pattern="reg.phoneNumber"
+                ng-required="true"
+                placeholder="Phone Number"
+                id="phoneNumber" 
+                name="phoneNumber"/>
+            <div ng-show="signupForm.phoneNumber.$touched && signupForm.phoneNumber.$error.pattern" 
+                    class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;">
+                Enter valid 10-digit number
+            </div>
+        </div>
+    </div>
+
+        <div>
+            <input ng-model="user.password" type="password"
+                    ng-pattern="reg.password"
+                    ng-required="true"
+                    placeholder="Password"
+                    ng-maxlength = 16
+                    id="password" 
+                    name="password"
+                    style="width: 94%;"/>
+            <div ng-show="signupForm.password.$touched && signupForm.password.$error.pattern" 
+                    class="red" style="width: 85%; font-size: 12px; margin-left: 1.5%;">
+                    Password should contain atleast 1-number (min-length: 4)
+            </div>        
+        </div>
+        
+
+        <div style="padding-bottom: 4px;">
+              <input ng-model="confirmPassword" type="password"
+                    ng-required="true"
+                    placeholder="Confirm Password"
+                    id="confirmPassword" 
+                    name="confirmPassword"
+                    style="width: 94%;"
+                    compare-to="user.password"/>
+            <div ng-show= "signupForm.confirmPassword.$error.compareTo && signupForm.confirmPassword.$dirty && signupForm.confirmPassword.$touched "
+                class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;" ng-model="hello">
+                Passwords do not match
+            </div>            
+        </div>
+        
+        <p style="margin-bottom:0px; margin-top:2px; margin-left: 4px;">Address: </p>
+        <div>
+            <input ng-model="user.address1" type="text"
+                    ng-pattern="reg.addressLine"
+                    ng-required="true"
+                    placeholder="Address Line 1"
+                    id="address1" 
+                    name="address1"
+                    style="width: 94%; margin-top:2%;"/>
+            <div ng-show="signupForm.address1.$touched && signupForm.address1.$error.pattern" 
+                    class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;">
+                 Enter valid input (min-length: 5) 
+            </div>
+        </div>
+
+        
+
+        <div>
+            <input ng-model="user.address2" type="text"
+                    ng-pattern="reg.addressLine"
+                    ng-required="true"
+                    placeholder="Address Line 2"
+                    id="address2" 
+                    name="address2"
+                    style="width: 94%;"/>
+            <div ng-show="signupForm.address2.$touched && signupForm.address2.$error.pattern" 
+                    class="red" style="width: 80%; font-size: 12px; margin-left: 1.5%;">
+                Enter valid input (min-length: 5)
+            </div>
+        </div>
+        
+
+        <div style="display: flex; margin-top:10px; margin-bottom: 6px;">
+            <div>
+                <label for="country" style="margin-left:4px;">Country</label>
+                <select ng-model="user.country" id="country" 
+                        ng-options="country as country for (country, states) in countries"
+                        ng-required="true"
+                        id="country" 
+                        name="country"
+                        style="width:120px; font-size: 12px;"> 
+                        <option value=''></option>
+                </select>
+            </div>
+            <div>
+                <label for="state" style="margin-left:12px;">State</label>
+                <select ng-model="user.state" id="state" 
+                        ng-disabled="!user.country"
+                      ng-options="state as state for (state,city) in countries[user.country]"
+                      ng-required="true"
+                      id="state" 
+                      name="state"
+                      style="width:150px; font-size: 12px;"> 
+                      <option value=''></option>
+                  </select>
+            </div>
+        </div>
+
+        <div style="display: flex; margin-top:10px; margin-bottom: 6px;">
+            <div style="margin-top:6px;">
+                <label for="city" style="margin-left:6px;">City</label>
+                <select ng-model="user.city" id="city" 
+                        ng-disabled="!user.country"
+                    ng-options="city as city for city in countries[user.country][user.state]"
+                    ng-required="true"
+                    id="city" 
+                    name="city"
+                    style="width: 120px; font-size: 12px; margin-left: 30px;"> 
+                    <option value=''></option>
+                </select>  
+            </div>
+
+            <div>
+                <input ng-model="user.postalCode" type="text"
+                        ng-pattern="reg.postalCode"
+                        ng-required="true"
+                        placeholder="Postal Code"
+                        id="postalCode" 
+                        name="postalCode"
+                        style="width: 70%; margin-left:20px;"/>
+                <div ng-show="signupForm.postalCode.$touched && signupForm.postalCode.$error.pattern" 
+                            class="red" style="width: 80%; font-size: 12px; margin-left: 26px;">
+                        Enter valid 6-digit postal code 
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; margin-top: 22px;">
+        <div>
+            <input type="reset"  value="Reset All" ng-click="reset()" 
+               style="background-color: #f48200;"></input></div>
+        <div style="margin-left: 14px;">       
+            <input type="submit" name="submit" value="Submit" 
+               ng-disabled="signupForm.$invalid && signupForm.$error"
+               style=" background-color: rgb(35, 156, 35);"/>
+        </div>
+    </div>       
+</form>
+<div style="font-size: 12px; margin-top:14px; margin-left: 8px;" class="jumpLink">already have an account: 
+<a href="#/signIn"  style=" font-size:14px;"> Sign In </a>
+
+</div>
+</div>
+
+</div>
+
+<!-- ng-show="confirmPassword != user.password && signupForm.confirmPassword.$dirty && signupForm.confirmPassword.$touched" -->
